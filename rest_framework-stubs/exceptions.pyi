@@ -2,6 +2,7 @@ from collections.abc import Sequence
 from typing import Any, Union
 
 from django.http import HttpRequest, JsonResponse
+from django.utils.functional import _StrOrPromise
 from rest_framework.renderers import BaseRenderer
 from rest_framework.request import Request
 
@@ -13,7 +14,7 @@ class ErrorDetail(str):
     code: str | None = ...
     def __new__(cls, string: str, code: str | None = ...) -> Any: ...
 
-_Detail = Union[str, list[Any], dict[str, Any]]
+_Detail = Union[str, list[Any], dict[str, Any], _StrOrPromise]
 
 class APIException(Exception):
     status_code: int = ...
